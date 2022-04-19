@@ -1,0 +1,10 @@
+// Плавный поворот объекта в сторону цели
+private void RotateBallistaToTarget(CTrap trap, Transform target)
+{
+    Observable.EveryUpdate().Subscribe(_ =>
+    {
+        Vector3 targetDirection = (target.position - trap.transform.position).normalized;
+        trap.transform.rotation = Quaternion.RotateTowards(trap.transform.rotation,
+            Quaternion.LookRotation(-targetDirection) , Time.deltaTime*100);
+        trap.transform.rotation = new Quaternion(0, trap.transform.rotation.y, 0, 1);
+    }).AddTo(trap.rotateForBallistaDisposable);
