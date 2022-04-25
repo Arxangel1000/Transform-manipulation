@@ -1,0 +1,6 @@
+                Observable.EveryUpdate().Subscribe(_ =>
+                {
+                    var _direction = (enemySimple.targetForAttack.CurAnim.transform.position - enemySimple.transform.position).normalized;
+                   var _lookRotation = Quaternion.LookRotation(_direction);
+                       enemySimple.transform.rotation = Quaternion.Slerp(enemySimple.transform.rotation, _lookRotation, Time.deltaTime * 9);
+                }).AddTo(enemySimple.lookAtTargetDisposable);
