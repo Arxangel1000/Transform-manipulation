@@ -1,0 +1,9 @@
+// Converting the position of an object from the game world to canvas
+
+    GameScreen.instance.Points[1].transform.position =   
+Camera.main.WorldToScreenPoint
+(player.LeftArm.transform.position);
+
+
+// reverse conversion
+Camera.main.ScreenToWorldPoint()
