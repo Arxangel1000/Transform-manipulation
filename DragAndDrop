@@ -1,0 +1,25 @@
+void Update()
+        {
+            DragAndDropObject(_player);
+        }
+        
+        private void DragAndDropObject(CPlayer player)
+        {
+            if (_player != null)
+            {
+                if (_player.curSelectPart != null)
+                {
+                    Vector3 mouse = Input.mousePosition;
+                    Ray castPoint = Camera.main.ScreenPointToRay(mouse);
+                    RaycastHit hit;
+                    
+                    speed = CorrectSpeedDependingPart(_player);
+                    
+                    if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, LayerMask.GetMask("Part")))
+                    {
+                        _player.curSelectPart.Collider.radius = 3; // Increasing the radius of the collider so that the dragging is stable
+                        _player.curSelectPart.transform.position = new Vector3(_player.curSelectPart.transform.position.x, hit.point.y, hit.point.z);
+                    }
+                }
+            }
+        }
